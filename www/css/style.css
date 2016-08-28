@@ -1,1 +1,17 @@
-/* Empty. Add your own CSS if you like */
+.img-label {
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+}
+
+.bro1 {
+    background: #387ef5;
+}
+
+.bro2 {
+    background: #ff363d;
+}
+
+.bro3 {
+    background: #ffc14f;
+}
