@@ -1,7 +1,15 @@
+em,i{
+    font-style:italic;
+}
+
 .img-label {
     height: 50px;
     width: 50px;
     display: inline-block;
+}
+
+.single-bro {
+    height: 150px;
 }
 
 .bro1 {

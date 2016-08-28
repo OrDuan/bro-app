@@ -1,11 +1,20 @@
 <ion-view view-title="Bro Message">
-    <ion-content class="padding">
-        <h2 class="text-center">{{ user.name }}<br> <i><small>{{ user.status }}</small></i></h2>
-        <div class="row" style="flex-wrap: wrap;">
-            <div class="single-bro col col-50 text-center {{ bro.type }}"
-                 ng-repeat="bro in bros track by bro.id"
-                 ng-click="send(user, bro)">
-                    {{ bro.name }}
+    <ion-content>
+        <div class="list card">
+            <div class="item item-avatar">
+                <img class="img-label {{user.type}}">
+                <h2>{{ user.name }}</h2>
+                <p><strong>{{ user.broName }}</strong></p>
+            </div>
+            <div class="item item-body">
+                <h1 class="text-center">Bro Back</h1>
+                <div class="row" style="flex-wrap: wrap;">
+                    <div class="single-bro col col-50 text-center {{ bro.type }}"
+                         ng-repeat="bro in bros track by bro.id"
+                         ng-click="send(user, bro)">
+                        {{ bro.name }}
+                    </div>
+                </div>
             </div>
         </div>
     </ion-content>

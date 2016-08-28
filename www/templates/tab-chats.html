@@ -1,15 +1,14 @@
 <ion-view view-title="Chats">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" ng-click="play(chat.type)">
-        <img class="img-label {{chat.type}}"></img>
+      <ion-item class="item-remove-animate item-avatar item-icon-right"
+                ng-repeat="chat in chats" type="item-text-wrap"
+                ng-click="play(chat.type)"
+                on-hold="showUser(chat.userId)">
+        <img class="img-label {{chat.type}}">
         <h2>{{chat.name}}</h2>
         <p>{{chat.status}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
-        {{ media }}
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>
