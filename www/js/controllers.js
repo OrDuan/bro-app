@@ -1,9 +1,14 @@
 angular.module('starter.controllers', [])
 
-    .controller('DashCtrl', function($scope) {})
+    .controller('DashCtrl', function($scope) {
+        $scope.userData = {
+            totalBros: 132,
+            lastWeek: 3
+        };
+    })
 
-    .controller('ChatsCtrl', function($scope, Chats, $state) {
-        $scope.chats = Chats.all();
+    .controller('ChatsCtrl', function($scope, Message, $state) {
+        $scope.messages = Message.all();
         $scope.media = null;
 
         $scope.play = function (type) {
@@ -17,9 +22,9 @@ angular.module('starter.controllers', [])
             $scope.media = new Media(src, null, null, null);
             $scope.media.play();
         };
-        
-        $scope.showUser = function (userId) {
-            $state.go('tab.new-message', {userId: userId});
+
+        $scope.showMessage = function (messageId) {
+            $state.go('tab.show-message', {messageId: messageId});
         };
     })
 
@@ -29,13 +34,36 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('SendMessageCtrl', function($scope, $stateParams, Chats, Bros, $http) {
-        $scope.user = Chats.get($stateParams.userId);
+
+    .controller('newMessageCtrl', function($scope, $cordovaContacts, $ionicLoading, $http) {
+        $scope.pickContactUsingNativeUI = function () {
+            $cordovaContacts.pickContact().then(function (contactPicked) {
+                $scope.pickedContact = contactPicked;
+                $ionicLoading.show({
+                    template: '<ion-spinner icon="crescent"></ion-spinner>',
+                    duration: 10000
+                });
+
+                $http.post('/api/verify-contact', {
+                    data: contactPicked
+                }).then(function (response) {
+                    $scope.hasApp = response.data.hasApp;
+                    $scope.pickedContact = contactPicked;
+                    $ionicLoading.hide();
+                });
+            })
+        };
+
+
+    })
+
+    .controller('ShowMessageCtrl', function($scope, $stateParams, Message, Bros, $http, $ionicPopup) {
+        $scope.message = Message.get($stateParams.messageId);
         $scope.bros = Bros.all();
 
         $scope.send = function (user, bro) {
             $http.post('api/new/message', {
-                userId: user.userId,
+                messageId: $scope.userId,
                 bro: bro.id,
             }).then(function (response) {
                 if (response.data.status == 'OK'){
@@ -49,6 +77,11 @@ angular.module('starter.controllers', [])
                         template: response.data.error
                     });
                 }
+            }, function () {
+                $ionicPopup.alert({
+                    title: 'ERROR!',
+                    template: "SERVER ERROR"
+                });
             });
         }
     });

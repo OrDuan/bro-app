@@ -2,6 +2,10 @@ em,i{
     font-style:italic;
 }
 
+.loading svg {
+    stroke: #ffffff;
+}
+
 .img-label {
     height: 50px;
     width: 50px;
@@ -23,3 +27,8 @@ em,i{
 .bro3 {
     background: #ffc14f;
 }
+
+.newBro h1 small {
+    font-size: 0.4em;
+}
+

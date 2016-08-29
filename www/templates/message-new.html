@@ -1,0 +1,24 @@
+<ion-view view-title="New Bro" class="newBro">
+    <ion-content>
+        <div ng-if="!pickedContact">
+            <button class="button button-full button-assertive" ng-click="pickContactUsingNativeUI()">
+                Pick a Bro
+            </button>
+        </div>
+        <div ng-if="pickedContact" class="padding-top">
+            <h1 class="text-center">{{ pickedContact.name.formatted }} <small ng-click="pickContactUsingNativeUI()">change</small></h1>
+            <div ng-if="!hasApp">
+                <div ng-include="'templates/bro-list.html'"></div>
+            </div>
+            <div ng-if="hasApp" class="text-center assertive">
+                <p>
+                    {{ pickedContact.name.formatted }} does not have our app :(
+                </p>
+                <button class="button col-center button-calm">
+                    Invite
+                </button>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

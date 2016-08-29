@@ -1,13 +1,13 @@
-<ion-view view-title="Chats">
+<ion-view view-title="Bro List">
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right"
-                ng-repeat="chat in chats" type="item-text-wrap"
-                ng-click="play(chat.type)"
-                on-hold="showUser(chat.userId)">
-        <img class="img-label {{chat.type}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.status}}</p>
+                ng-repeat="message in messages" type="item-text-wrap"
+                ng-click="play(message.type)"
+                on-hold="showMessage(message.id)">
+        <img class="img-label {{message.type}}">
+        <h2>{{message.name}}</h2>
+        <p>{{message.status}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>

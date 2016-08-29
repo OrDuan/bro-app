@@ -48,7 +48,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                     }
                 }
             })
-
             .state('tab.chats', {
                 url: '/chats',
                 views: {
@@ -58,22 +57,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                     }
                 }
             })
-            .state('tab.new-message', {
-                url: '/chats/send/:userId',
+            .state('tab.show-message', {
+                url: '/chats/show/:messageId',
                 views: {
                     'tab-chats': {
-                        templateUrl: 'templates/send-message.html',
-                        controller: 'SendMessageCtrl'
+                        templateUrl: 'templates/message-show.html',
+                        controller: 'ShowMessageCtrl'
                     }
                 }
             })
-
-            .state('tab.account', {
-                url: '/account',
+            // .state('tab.account', {
+            //     url: '/account',
+            //     views: {
+            //         'tab-account': {
+            //             templateUrl: 'templates/tab-account.html',
+            //             controller: 'AccountCtrl'
+            //         }
+            //     }
+            // })
+            .state('tab.newMessage', {
+                url: '/message/new',
                 views: {
-                    'tab-account': {
-                        templateUrl: 'templates/tab-account.html',
-                        controller: 'AccountCtrl'
+                    'tab-message': {
+                        templateUrl: 'templates/message-new.html',
+                        controller: 'newMessageCtrl'
                     }
                 }
             });
