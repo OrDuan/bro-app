@@ -1,0 +1,15 @@
+<ion-view view-title="Bro List">
+    <ion-content>
+        <div class="list">
+            <a class="item item-button-right"
+               ng-repeat="message in messages" type="item-text-wrap"
+               ng-click="showMessage(message.id)">
+                <h2 {{message.bro.code}}>{{message.sender.name}}<small> - {{message.bro.name}}</small></h2>
+                <button class="button button-positive" ng-click="play(message.bro.code); $event.preventDefault()">
+                    <i class="icon ion-arrow-right-b"></i>
+                </button>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
+

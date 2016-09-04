@@ -3,6 +3,7 @@ angular.module('starter.controllers', [])
     .controller('DashCtrl', function($scope) {
         $scope.userData = {
             totalBros: 132,
+            lastDay: 1,
             lastWeek: 3
         };
     })
@@ -11,8 +12,8 @@ angular.module('starter.controllers', [])
         $scope.messages = Message.all();
         $scope.media = null;
 
-        $scope.play = function (type) {
-            var baseSrc = "sounds/" + type + ".wav";
+        $scope.play = function (typeCode) {
+            var baseSrc = "sounds/" + typeCode + ".wav";
             var src = ionic.Platform.isAndroid() ? "/android_asset/www/" + baseSrc : baseSrc;
             if ($scope.media) {
                 $scope.media.stop();
@@ -49,39 +50,24 @@ angular.module('starter.controllers', [])
                 }).then(function (response) {
                     $scope.hasApp = response.data.hasApp;
                     $scope.pickedContact = contactPicked;
+                    $scope.user = response.data.user;
                     $ionicLoading.hide();
                 });
             })
         };
 
+        $scope.pickBro = function (bro) {
+            Message.create($scope.user.id, bro);
+        }
+
 
     })
 
-    .controller('ShowMessageCtrl', function($scope, $stateParams, Message, Bros, $http, $ionicPopup) {
+    .controller('ShowMessageCtrl', function($scope, $stateParams, Message, Bros) {
         $scope.message = Message.get($stateParams.messageId);
-        $scope.bros = Bros.all();
+        $scope.brosList = Bros.all();
 
-        $scope.send = function (user, bro) {
-            $http.post('api/new/message', {
-                messageId: $scope.userId,
-                bro: bro.id,
-            }).then(function (response) {
-                if (response.data.status == 'OK'){
-                    $ionicPopup.alert({
-                        title: 'Bro message was sent!',
-                        template: $scope.user.name + ' will get your bro message! :)'
-                    });
-                } else {
-                    $ionicPopup.alert({
-                        title: 'ERROR!',
-                        template: response.data.error
-                    });
-                }
-            }, function () {
-                $ionicPopup.alert({
-                    title: 'ERROR!',
-                    template: "SERVER ERROR"
-                });
-            });
+        $scope.pickBro = function (bro) {
+            Message.create($scope.message.user.id, bro);
         }
     });

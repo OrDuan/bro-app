@@ -2,13 +2,13 @@
     <ion-content>
         <div class="list card">
             <div class="item item-avatar">
-                <img class="img-label {{message.type}}">
-                <h2>{{ message.name }}</h2>
-                <p><strong>{{ message.broName }}</strong></p>
+                <img class="img-label {{message.bro.code}}">
+                <h2>{{ message.sender.name }}</h2>
+                <p><strong>{{ message.bro.name }}</strong></p>
             </div>
             <div class="item item-body">
-                <h1 class="text-center">Bro Back</h1>
-
+                <h1 class="text-center">Bro Back!</h1>
+                <div ng-include="'templates/bro-list.html'"></div>
             </div>
         </div>
     </ion-content>

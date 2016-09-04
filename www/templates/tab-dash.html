@@ -1,13 +1,26 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <h2>Welcome To The Bro App</h2>
-    <p>
-        Total Bros: <strong>{{ userData.totalBros }}</strong>
-    </p>
-    <p>
-        Last Week Bros: <strong>{{ userData.lastWeek }}</strong>
-    </p>
-    {{ contact.formatted }}
-      <button class="button button-dark" ui-sref="tab.newMessage">Bro</button>
-  </ion-content>
+    <ion-content>
+        <h2 class="padding">Dash<b>Bro</b>ad</h2>
+        <div class="list">
+            <a class="item" href="#">
+                Total Bros
+                <span class="item-note">
+                    <strong>{{ userData.totalBros }}</strong>
+                </span>
+            </a>
+            <a class="item" href="#">
+                Last Week Bros
+                <span class="item-note">
+                    <strong>{{ userData.lastWeek }}</strong>
+                </span>
+            </a>
+            <a class="item" href="#">
+                Last Day Bros
+                <span class="item-note">
+                    <strong>{{ userData.lastDay }}</strong>
+                </span>
+            </a>
+        </div>
+        <button class="button button-calm button-full" ui-sref="tab.newMessage">Bro Someone Now!</button>
+    </ion-content>
 </ion-view>

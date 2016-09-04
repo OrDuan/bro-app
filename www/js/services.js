@@ -1,40 +1,73 @@
 angular.module('starter.services', [])
 
-    .factory('Message', function() {
+    .factory('Message', function($http, $ionicPopup) {
         // Might use a resource here that returns a JSON array
 
         // Some fake testing data
         var messages = [{
-            id: 0,
-            name: 'Nati Harray',
-            userId: 'nati131',
-            status: 'I\'m free todo what I want',
-            type: 'bro1',
-            broName: 'Crazy Bro'
+            id: '9asdasd87asdas7asd8',
+            sender: {
+                userId: '9as7fsa98f7asd89fas789f',
+                name: 'Nati Harray'
+            },
+            bro: {
+                name: 'Crazy Bro',
+                code: 'bro1'
+            }
         }, {
-            id: 2,
-            userId: 'or113',
-            name: 'Or Duan',
-            status: 'Jinja Developer',
-            type: 'bro2',
-            broName: 'Normal Bro'
+            id: '9asd87as789asd8asd8',
+            sender: {
+                userId: 'a9s8f7a9sdf79a8sdfasdf',
+                name: 'Or Duan'
+            },
+            bro: {
+                name: 'Lol Bro',
+                code: 'bro2'
+            }
         }, {
-            id: 3,
-            name: 'Nobody',
-            userId: 'Nobody132',
-            status: 'I\'m no body',
-            type: 'bro3',
-            broName: 'Lol Bro'
+            id: 'sdf87asdf978a7234j',
+            sender: {
+                userId: 'as97f9a8sdf98asdf78',
+                name: 'Omer Korner'
+            },
+            bro: {
+                name: 'Normal Bro',
+                code: 'bro3'
+            }
         }];
+
 
         return {
             all: function() {
                 return messages;
             },
+            create: function (recipient, bro) {
+                $http.post('api/new/message', {
+                    recipientId: recipient.id,
+                    broId: bro.id,
+                }).then(function (response) {
+                    if (response.data.status == 'OK'){
+                        $ionicPopup.alert({
+                            title: 'Bro message was sent!',
+                            template: response.data.recipientName + ' will get your bro message! :)'
+                        });
+                    } else {
+                        $ionicPopup.alert({
+                            title: 'ERROR!',
+                            template: response.data.error
+                        });
+                    }
+                }, function () {
+                    $ionicPopup.alert({
+                        title: 'ERROR!',
+                        template: "SERVER ERROR"
+                    });
+                });
+            },
             get: function(id) {
                 var i;
                 for (i = 0; i < messages.length; i++) {
-                    if (messages[i].id === parseInt(id)) {
+                    if (messages[i].id === id) {
                         return messages[i];
                     }
                 }
@@ -49,15 +82,15 @@ angular.module('starter.services', [])
         var bros = [{
             id: 0,
             name: 'Crazy Bro',
-            type: 'bro1',
+            code: 'bro1',
         }, {
             id: 2,
             name: 'Normal Bro',
-            type: 'bro2',
+            code: 'bro2',
         }, {
             id: 3,
             name: 'Lol Bro',
-            type: 'bro3',
+            code: 'bro3',
         }];
 
         return {
